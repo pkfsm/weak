@@ -1,0 +1,32 @@
+name: Run Telegram Userbot
+
+on:
+  workflow_dispatch:           # Allows manual trigger via Actions tab
+  push:
+    branches: [main, master]
+
+jobs:
+  run-userbot:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@v4
+
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: 3.11
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run userbot script
+      env:
+        SESSION_STRING: ${{ secrets.SESSION_STRING }}
+        API_ID: ${{ secrets.API_ID }}
+        API_HASH: ${{ secrets.API_HASH }}
+      run: |
+        python userbot.py
