@@ -78,11 +78,10 @@ async def download_m3u8(url, filename):
         print(f"Error downloading m3u8: {e}")
         return None
 
-@app.on_message(filters.command("dl") & filters.group & filters.me)
-async def on_dl_command(client: Client, message: Message):
-    # Expected format: /dl [URL] FILENAME
+@ app.on_message(filters.command("dl") & filters.group & filters.me)
+async def on_dl_command(client, message):
     text = message.text or ""
-    match = re.match(r'/dl\\s+\\[([^\\]]+)\\]\\s+(.*)', text.strip(), re.IGNORECASE)
+    match = re.match(r'/dl\s+\[([^\]]+)\]\s+(.*)', text.strip(), re.IGNORECASE)
     if not match:
         await message.reply_text("Usage: /dl [URL] FILENAME")
         return
