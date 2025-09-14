@@ -6,9 +6,12 @@ import subprocess
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
-API_ID = YOUR_API_ID
-API_HASH = "YOUR_API_HASH"
-SESSION_STRING = "YOUR_SESSION_STRING"
+
+
+API_ID = int(os.getenv('API_ID'))
+API_HASH = os.getenv('API_HASH')
+SESSION_STRING = os.getenv('SESSION_STRING')
+
 
 DOWNLOADS_DIR = "downloads"
 os.makedirs(DOWNLOADS_DIR, exist_ok=True)
